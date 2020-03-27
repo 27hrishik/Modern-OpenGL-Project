@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		00755B3A242E1FE100056BFF /* sphere.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 00755B38242E1FE100056BFF /* sphere.cpp */; };
+		00755B3E242E203400056BFF /* loadShader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 00755B3C242E203400056BFF /* loadShader.cpp */; };
 		C38C208D242CB59500053F80 /* Debugger.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C38C208B242CB59500053F80 /* Debugger.cpp */; };
 		C38C2090242CB6BE00053F80 /* Buffers.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C38C208E242CB6BE00053F80 /* Buffers.cpp */; };
 		C38C2093242CBA6F00053F80 /* Renderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C38C2091242CBA6F00053F80 /* Renderer.cpp */; };
@@ -31,6 +33,12 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		00755B36242E1FE100056BFF /* sphereShader.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = sphereShader.vert; sourceTree = "<group>"; };
+		00755B37242E1FE100056BFF /* sphereShader.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = sphereShader.frag; sourceTree = "<group>"; };
+		00755B38242E1FE100056BFF /* sphere.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = sphere.cpp; sourceTree = "<group>"; };
+		00755B39242E1FE100056BFF /* sphere.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sphere.h; sourceTree = "<group>"; };
+		00755B3C242E203400056BFF /* loadShader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = loadShader.cpp; path = "../../../../Sphere-cylinder GL4/Sphere-cylinder GL4/Shaders/loadShader.cpp"; sourceTree = "<group>"; };
+		00755B3D242E203400056BFF /* loadShader.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = loadShader.hpp; path = "../../../../Sphere-cylinder GL4/Sphere-cylinder GL4/Shaders/loadShader.hpp"; sourceTree = "<group>"; };
 		C38C208B242CB59500053F80 /* Debugger.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Debugger.cpp; sourceTree = "<group>"; };
 		C38C208C242CB59500053F80 /* Debugger.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Debugger.hpp; sourceTree = "<group>"; };
 		C38C208E242CB6BE00053F80 /* Buffers.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Buffers.cpp; sourceTree = "<group>"; };
@@ -447,6 +455,35 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		00755B34242E1E2E00056BFF /* Shapes */ = {
+			isa = PBXGroup;
+			children = (
+				00755B3B242E202300056BFF /* Shaders */,
+				00755B35242E1E4700056BFF /* Sphere */,
+			);
+			path = Shapes;
+			sourceTree = "<group>";
+		};
+		00755B35242E1E4700056BFF /* Sphere */ = {
+			isa = PBXGroup;
+			children = (
+				00755B38242E1FE100056BFF /* sphere.cpp */,
+				00755B39242E1FE100056BFF /* sphere.h */,
+				00755B37242E1FE100056BFF /* sphereShader.frag */,
+				00755B36242E1FE100056BFF /* sphereShader.vert */,
+			);
+			path = Sphere;
+			sourceTree = "<group>";
+		};
+		00755B3B242E202300056BFF /* Shaders */ = {
+			isa = PBXGroup;
+			children = (
+				00755B3C242E203400056BFF /* loadShader.cpp */,
+				00755B3D242E203400056BFF /* loadShader.hpp */,
+			);
+			path = Shaders;
+			sourceTree = "<group>";
+		};
 		C38C2089242CB3BA00053F80 /* Engine */ = {
 			isa = PBXGroup;
 			children = (
@@ -938,6 +975,7 @@
 		C3A3A5EE2426A675002FA86C /* Modern_openGL-Project */ = {
 			isa = PBXGroup;
 			children = (
+				00755B34242E1E2E00056BFF /* Shapes */,
 				C38C20A3242D277B00053F80 /* glm */,
 				C38C2099242D067000053F80 /* Vendors */,
 				C38C208A242CB3E800053F80 /* Assets */,
@@ -1023,11 +1061,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				00755B3A242E1FE100056BFF /* sphere.cpp in Sources */,
 				C38C208D242CB59500053F80 /* Debugger.cpp in Sources */,
 				C38C209D242D0AE200053F80 /* Textures.cpp in Sources */,
 				C38C2093242CBA6F00053F80 /* Renderer.cpp in Sources */,
 				C38C2090242CB6BE00053F80 /* Buffers.cpp in Sources */,
 				C3FD9FAC242B7A3C00073762 /* Shader.cpp in Sources */,
+				00755B3E242E203400056BFF /* loadShader.cpp in Sources */,
 				C3A3A5FE2426A9A5002FA86C /* main.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
