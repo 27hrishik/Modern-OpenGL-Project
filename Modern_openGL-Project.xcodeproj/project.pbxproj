@@ -7,22 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		003FFAC0242B9E2F00CEDBBB /* loadShader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 003FFABF242B9E2F00CEDBBB /* loadShader.cpp */; };
 		C38C208D242CB59500053F80 /* Debugger.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C38C208B242CB59500053F80 /* Debugger.cpp */; };
 		C38C2090242CB6BE00053F80 /* Buffers.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C38C208E242CB6BE00053F80 /* Buffers.cpp */; };
 		C38C2093242CBA6F00053F80 /* Renderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C38C2091242CBA6F00053F80 /* Renderer.cpp */; };
 		C38C209D242D0AE200053F80 /* Textures.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C38C209B242D0AE200053F80 /* Textures.cpp */; };
-
 		C3A3A5F82426A856002FA86C /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3A3A5F72426A856002FA86C /* OpenGL.framework */; };
 		C3A3A5FA2426A911002FA86C /* libGLEW.2.1.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C3A3A5F92426A911002FA86C /* libGLEW.2.1.0.dylib */; };
 		C3A3A5FC2426A941002FA86C /* libglfw.3.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C3A3A5FB2426A941002FA86C /* libglfw.3.3.dylib */; };
 		C3A3A5FE2426A9A5002FA86C /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C3A3A5FD2426A9A5002FA86C /* main.cpp */; };
-
-		C3FD9FB0242B86B900073762 /* basic.vert in CopyFiles */ = {isa = PBXBuildFile; fileRef = C3FD9FAD242B7D1F00073762 /* basic.vert */; };
-		C3FD9FB1242B86C100073762 /* basic.frag in CopyFiles */ = {isa = PBXBuildFile; fileRef = C3FD9FAE242B7D3600073762 /* basic.frag */; };
-
 		C3FD9FAC242B7A3C00073762 /* Shader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C3FD9FA9242B77AA00073762 /* Shader.cpp */; };
-
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -38,9 +31,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-
-		003FFABF242B9E2F00CEDBBB /* loadShader.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = loadShader.cpp; path = "Modern_openGL-Project/Shader/loadShader.cpp"; sourceTree = "<group>"; };
-
 		C38C208B242CB59500053F80 /* Debugger.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Debugger.cpp; sourceTree = "<group>"; };
 		C38C208C242CB59500053F80 /* Debugger.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Debugger.hpp; sourceTree = "<group>"; };
 		C38C208E242CB6BE00053F80 /* Buffers.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Buffers.cpp; sourceTree = "<group>"; };
@@ -434,7 +424,6 @@
 		C38C2222242D277B00053F80 /* rotate_normalized_axis.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = rotate_normalized_axis.hpp; sourceTree = "<group>"; };
 		C38C2223242D277B00053F80 /* projection.inl */ = {isa = PBXFileReference; lastKnownFileType = text; path = projection.inl; sourceTree = "<group>"; };
 		C38C2224242D277B00053F80 /* type_aligned.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = type_aligned.hpp; sourceTree = "<group>"; };
-
 		C3A3A5EC2426A675002FA86C /* Modern_openGL-Project */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "Modern_openGL-Project"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C3A3A5F72426A856002FA86C /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
 		C3A3A5F92426A911002FA86C /* libGLEW.2.1.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libGLEW.2.1.0.dylib; path = ../../../../usr/local/lib/libGLEW.2.1.0.dylib; sourceTree = "<group>"; };
@@ -932,7 +921,6 @@
 		C3A3A5E32426A675002FA86C = {
 			isa = PBXGroup;
 			children = (
-				003FFABF242B9E2F00CEDBBB /* loadShader.cpp */,
 				C3A3A5EE2426A675002FA86C /* Modern_openGL-Project */,
 				C3A3A5ED2426A675002FA86C /* Products */,
 				C3A3A5F62426A856002FA86C /* Frameworks */,
@@ -1035,15 +1023,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-
-				003FFAC0242B9E2F00CEDBBB /* loadShader.cpp in Sources */,
-
 				C38C208D242CB59500053F80 /* Debugger.cpp in Sources */,
 				C38C209D242D0AE200053F80 /* Textures.cpp in Sources */,
 				C38C2093242CBA6F00053F80 /* Renderer.cpp in Sources */,
 				C38C2090242CB6BE00053F80 /* Buffers.cpp in Sources */,
 				C3FD9FAC242B7A3C00073762 /* Shader.cpp in Sources */,
-
 				C3A3A5FE2426A9A5002FA86C /* main.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
