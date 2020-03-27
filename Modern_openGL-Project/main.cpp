@@ -9,7 +9,18 @@
 #include<iostream>
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
-#include "Shader/loadShader.hpp"
+
+//Renderer Abstraction
+#include "Engine/Debugger.hpp"
+#include "Engine/Shader.hpp"
+#include "Engine/Renderer.hpp"
+#include "Engine/Buffers.hpp"
+#include "Engine/Textures.hpp"
+
+//GL Mathematics Libray
+#include "glm/glm.hpp"
+#include "glm/gtc/matrix_transform.hpp"
+#include "glm/gtc/type_ptr.hpp"
 
 using namespace std;
 //function Declarations
@@ -31,6 +42,7 @@ int main()
     // Create OpenGL window and context
     GLFWwindow* window = glfwCreateWindow(800, 600, "Find the Ball", NULL, NULL);
     glfwMakeContextCurrent(window);
+    glfwSwapInterval(1);
     
     // Check for window creation failure
     if (!window)
@@ -52,50 +64,76 @@ int main()
     cout<<"Vertex Array ID :"<<VertexArrayID<<endl;
     
     //Position to draw a Triangle
-    static const float vertexBufferData[] = {
-        -1.0f, -1.0f, 0.0f,
-        1.0f, -1.0f, 0.0f,
-        0.0f,  1.0f, 0.0f,
+    float positions[] = {
+        -0.5f, -0.5f, 0.0f, 0.0f, // 0
+         0.5f, -0.5f, 1.0f, 0.0f, // 1
+         0.5f,  0.5f, 1.0f, 1.0f, // 2
+        -0.5f,  0.5f, 0.0f, 1.0f  // 3
     };
     
-    //Create a Vertex Buffer
-    // This will identify our vertex buffer
-    unsigned int vertexBufferID;
-    // Generate 1 buffer, put the resulting identifier in vertexbuffer
-    glGenBuffers(1, &vertexBufferID);
-    cout<<"Vertex Buffer ID :"<<vertexBufferID<<endl;
-    // The following commands will talk about our 'vertexbuffer' buffer
-    glBindBuffer(GL_ARRAY_BUFFER, vertexBufferID);
-    // Give our vertices to OpenGL.
-    glBufferData(GL_ARRAY_BUFFER, 9 * sizeof(float), vertexBufferData, GL_STATIC_DRAW);
+    unsigned int indices[] = {
+        0, 1, 2,
+        2, 3, 0
+    };
     
-    unsigned int shaderProgramID = LoadShaders("Shader/basic.vert", "Shader/basic.frag");
-    // Event loop
-    while(!glfwWindowShouldClose(window))
+    // Early Termination for Deallocation Before the GLFW Context is Lost
     {
-        // Clear the screen to black
-        glClearColor(1.0f, 1.0f, 0.0f, 1.0f);
-        glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
-        // the Main code Starts here
-        //Use the Shader Program
-        glUseProgram(shaderProgramID);
-        drawTriangle(vertexBufferID);
-        //the Main Code Ends here
-        glfwSwapBuffers(window);
-        glfwPollEvents();
+        VertexArray va;
+        VertexBuffer vb(positions, 4 * 4 * sizeof(float));
+        IndexBuffer ib(indices, 6);
+        
+        glm::mat4 proj = glm::ortho(-4.0f, 4.0f, -3.0f, 3.0f, -1.0f, 1.0f);
+        
+        glm::mat4 ident = glm::mat4(1.0f);
+        glm::vec3 trvec = glm::vec3(0, 0, 0);
+        glm::mat4 view = glm::translate(ident, trvec);
+        
+        glm::mat4 model = glm::translate(glm::mat4(1.0f), glm::vec3(-1.0f, -1.0f, 0));
+        
+        glm::mat4 mvp = proj * view * model;
+
+        
+        VertexBufferLayout layout;
+        layout.AddFloat(2);
+        layout.AddFloat(2);
+    
+        va.AddBuffer(vb, layout);
+    
+        Shader shader("Assets/Shaders/basic.vert");
+        shader.Bind();
+        
+        Texture texture("wood.jpg");
+        texture.Bind();
+        shader.SetUniform1i("u_Texture", 0);
+        shader.SetUniformMat4f("u_MVP", mvp);
+        
+        float red = 0.0f;
+        float step = 0.005f;
+    
+        Renderer renderer;
+    
+        // Event loop
+        while(!glfwWindowShouldClose(window))
+        {
+            renderer.Clear();
+            
+            shader.Bind();
+            shader.SetUniform4f("u_Color", red, 0.3, 0.8, 1.0);
+            
+            renderer.Draw(va, ib, shader);
+            
+            // Swap buffers
+            glfwSwapBuffers(window);
+            glfwPollEvents();
+            
+            // increment red
+            if (red < 0.0f || red > 1.0f)
+                step *= -1.0;
+            red += step;
+        }
     }
     
     // Terminate GLFW
     glfwTerminate(); return 0;
 }
 
-void drawTriangle(int vertexBufferID)
-{
-    glEnableVertexAttribArray(0);
-    glBindBuffer(GL_ARRAY_BUFFER, vertexBufferID);
-    glVertexAttribPointer( 0, 3, GL_FLOAT, GL_FALSE, 0, (void*)0 );
-    
-    // Draw the triangle !
-    glDrawArrays(GL_TRIANGLES, 0, 3); // Starting from vertex 0; 3 vertices total -> 1 triangle
-    glDisableVertexAttribArray(0);
-}
