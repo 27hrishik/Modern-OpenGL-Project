@@ -39,6 +39,10 @@
 		00755B39242E1FE100056BFF /* sphere.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sphere.h; sourceTree = "<group>"; };
 		00755B3C242E203400056BFF /* loadShader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = loadShader.cpp; path = "../../../../Sphere-cylinder GL4/Sphere-cylinder GL4/Shaders/loadShader.cpp"; sourceTree = "<group>"; };
 		00755B3D242E203400056BFF /* loadShader.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = loadShader.hpp; path = "../../../../Sphere-cylinder GL4/Sphere-cylinder GL4/Shaders/loadShader.hpp"; sourceTree = "<group>"; };
+		008ADAE5242F1D36003E92EA /* cylinder.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = cylinder.cpp; sourceTree = "<group>"; };
+		008ADAE6242F1D36003E92EA /* cylinderShader.vert */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = cylinderShader.vert; sourceTree = "<group>"; };
+		008ADAE7242F1D36003E92EA /* cylinderShader.frag */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = cylinderShader.frag; sourceTree = "<group>"; };
+		008ADAE8242F1D36003E92EA /* cylinder.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = cylinder.hpp; sourceTree = "<group>"; };
 		C38C208B242CB59500053F80 /* Debugger.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Debugger.cpp; sourceTree = "<group>"; };
 		C38C208C242CB59500053F80 /* Debugger.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Debugger.hpp; sourceTree = "<group>"; };
 		C38C208E242CB6BE00053F80 /* Buffers.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Buffers.cpp; sourceTree = "<group>"; };
@@ -458,6 +462,7 @@
 		00755B34242E1E2E00056BFF /* Shapes */ = {
 			isa = PBXGroup;
 			children = (
+				008ADAE4242F1D36003E92EA /* Cylinder */,
 				00755B3B242E202300056BFF /* Shaders */,
 				00755B35242E1E4700056BFF /* Sphere */,
 			);
@@ -482,6 +487,17 @@
 				00755B3D242E203400056BFF /* loadShader.hpp */,
 			);
 			path = Shaders;
+			sourceTree = "<group>";
+		};
+		008ADAE4242F1D36003E92EA /* Cylinder */ = {
+			isa = PBXGroup;
+			children = (
+				008ADAE5242F1D36003E92EA /* cylinder.cpp */,
+				008ADAE6242F1D36003E92EA /* cylinderShader.vert */,
+				008ADAE7242F1D36003E92EA /* cylinderShader.frag */,
+				008ADAE8242F1D36003E92EA /* cylinder.hpp */,
+			);
+			path = Cylinder;
 			sourceTree = "<group>";
 		};
 		C38C2089242CB3BA00053F80 /* Engine */ = {

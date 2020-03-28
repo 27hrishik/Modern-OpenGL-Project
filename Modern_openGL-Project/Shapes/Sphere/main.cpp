@@ -12,11 +12,11 @@ using namespace std;
 //Libraries
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
-#include "glm/gtc/type_ptr.hpp"
+#include "../../glm/gtc/type_ptr.hpp"
 
 //Shaders
-#include "Sphere/sphere.h"
-#include "Shaders/loadShader.hpp"
+#include "./sphere.h"
+#include "../Shaders/loadShader.hpp"
 
 
 //Global declarations
