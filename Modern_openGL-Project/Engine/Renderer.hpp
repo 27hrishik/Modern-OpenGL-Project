@@ -15,11 +15,28 @@
 #include "Buffers.hpp"
 #include "Shader.hpp"
 
+struct RenderData
+{
+    VertexArray& vertexArray;
+    IndexBuffer& indexBuffer;
+    Shader& shader;
+    GLenum mode;
+    bool primitiveRestart;
+    
+    RenderData(VertexArray& va,IndexBuffer& ib,Shader& shader,GLenum mode = GL_TRIANGLES,bool enablePrimitiveRestart = false)
+    :vertexArray(va),indexBuffer(ib),shader(shader),mode(mode)
+    {
+        
+    }
+    
+};
+
 class Renderer
 {
 public:
     void Clear() const;
-    void Draw(const VertexArray& va, const IndexBuffer& ib, const Shader& shader) const;
+    void Draw(const VertexArray& va, const IndexBuffer& ib, const Shader& shader, GLenum mode = GL_TRIANGLES) const;
+    void Draw(const RenderData& renderData);
 };
 
 #endif /* Renderer_hpp */

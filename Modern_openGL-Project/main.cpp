@@ -7,6 +7,8 @@
 //
 
 #include<iostream>
+
+//Base GL
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 
@@ -16,6 +18,7 @@
 #include "Engine/Renderer.hpp"
 #include "Engine/Buffers.hpp"
 #include "Engine/Textures.hpp"
+#include "Engine/Primitives.hpp"
 
 //GL Mathematics Libray
 #include "glm/glm.hpp"
@@ -24,7 +27,11 @@
 
 using namespace std;
 //function Declarations
-void drawTriangle(int);
+std::vector<float> getUnitCircleVertices(float,float);
+
+//global declaration
+float height = 1.0f;
+float radius = 0.5f;
 
 // Define main function
 int main()
@@ -64,76 +71,97 @@ int main()
     cout<<"Vertex Array ID :"<<VertexArrayID<<endl;
     
     //Position to draw a Triangle
-    float positions[] = {
-        -0.5f, -0.5f, 0.0f, 0.0f, // 0
-         0.5f, -0.5f, 1.0f, 0.0f, // 1
-         0.5f,  0.5f, 1.0f, 1.0f, // 2
-        -0.5f,  0.5f, 0.0f, 1.0f  // 3
-    };
+//    float positions[] = {
+//        -0.5f, -0.5f, 0.0f, 0.0f, // 0
+//         0.5f, -0.5f, 1.0f, 0.0f, // 1
+//         0.5f,  0.5f, 1.0f, 1.0f, // 2
+//        -0.5f,  0.5f, 0.0f, 1.0f  // 3
+//    };
+//
+//    unsigned int indices[] = {
+//        0, 1, 2,
+//        2, 3, 0
+//    };
     
-    unsigned int indices[] = {
-        0, 1, 2,
-        2, 3, 0
-    };
+    auto[vertices0,indices0] = Primitives::CreateSphere();
+    auto[vertices1,indices1] = Primitives::CreateCylinder(1.0f,20,0.6f,0.5f,false);
+    auto[vertices2,indices2] = Primitives::CreateQuad();
     
+    for(auto& vert:vertices2)
+        std::cout<<vert<<" ";
+    std::cout<<endl;
+    for(auto& ind:indices2)
+        std::cout<<ind<<" ";
     // Early Termination for Deallocation Before the GLFW Context is Lost
     {
-        VertexArray va;
-        VertexBuffer vb(positions, 4 * 4 * sizeof(float));
-        IndexBuffer ib(indices, 6);
+        VertexArray va0,va1,va2;
         
-        glm::mat4 proj = glm::ortho(-4.0f, 4.0f, -3.0f, 3.0f, -1.0f, 1.0f);
+        VertexBuffer vb0(&vertices0[0], vertices0.size()*sizeof(GLfloat));
+        IndexBuffer ib0(&indices0[0], indices0.size());
         
-        glm::mat4 ident = glm::mat4(1.0f);
-        glm::vec3 trvec = glm::vec3(0, 0, 0);
-        glm::mat4 view = glm::translate(ident, trvec);
+        VertexBuffer vb1(&vertices1[0], vertices1.size()*sizeof(GLfloat));
+        IndexBuffer ib1(&indices1[0], indices1.size());
         
-        glm::mat4 model = glm::translate(glm::mat4(1.0f), glm::vec3(-1.0f, -1.0f, 0));
+        VertexBuffer vb2(&vertices2[0], vertices2.size()*sizeof(GLfloat));
+        IndexBuffer ib2(&indices2[0], indices2.size());
         
-        glm::mat4 mvp = proj * view * model;
-
+        glm::mat4 proj = glm::ortho(-4.0f, 4.0f, -3.0f, 3.0f, -10.0f, 10.0f);
         
-        VertexBufferLayout layout;
-        layout.AddFloat(2);
-        layout.AddFloat(2);
+        glm::mat4 view = glm::translate(glm::mat4(1.0f),glm::vec3(0.0f,0.0f,0.0f));
+        glm::mat4 model0 = glm::translate(glm::mat4(1.0f), glm::vec3(1.0f, 0.0f, 0.0f));
+        glm::mat4 model1 = glm::translate(glm::mat4(1.0f), glm::vec3(-1.0f,0.0f,0.0f));
+        glm::mat4 model2 = glm::rotate(glm::mat4(1.0f), -45.0f, glm::vec3(1.0f,0.0f,0.0f));
+        
+        glm::mat4 mvp0 = proj * view * model0;
+        glm::mat4 mvp1 = proj * view * model1;
+        glm::mat4 mvp2 = proj * view * model2;
+        
+        VertexBufferLayout layout0,layout1,layout2;
+        layout0.AddFloat(3);
+        layout1.AddFloat(3);
+        layout2.AddFloat(3);
     
-        va.AddBuffer(vb, layout);
-    
-        Shader shader("Assets/Shaders/basic.vert");
-        shader.Bind();
+        va0.AddBuffer(vb0, layout0);
+        va1.AddBuffer(vb1, layout1);
+        va2.AddBuffer(vb2, layout2);
         
-        Texture texture("wood.jpg");
-        texture.Bind();
-        shader.SetUniform1i("u_Texture", 0);
-        shader.SetUniformMat4f("u_MVP", mvp);
+        Shader shader0("Assets/Shaders/Unlit.vert","Assets/Shaders/Unlit.frag");
+        //Shader shader1("Assets/Shaders/Basic.vert","Assets/Shaders/Basic.vert");
         
-        float red = 0.0f;
-        float step = 0.005f;
+        RenderData rData0(va0,ib0,shader0,GL_TRIANGLE_STRIP,false);
+        RenderData rData1(va1,ib1,shader0,GL_TRIANGLES,false);
+        RenderData rData2(va2,ib2,shader0,GL_TRIANGLES,false);
     
         Renderer renderer;
     
         // Event loop
         while(!glfwWindowShouldClose(window))
         {
+            glEnable(GL_DEPTH_TEST);
+            glDepthFunc(GL_LESS);
             renderer.Clear();
             
-            shader.Bind();
-            shader.SetUniform4f("u_Color", red, 0.3, 0.8, 1.0);
+            shader0.SetUniform4f("u_Color", 1.0f,1.0f,0.0f,0.0f);
+            shader0.SetUniformMat4f("u_MVP", mvp0);
+            renderer.Draw(rData0);
+
+            model1 = glm::rotate(model1,0.005f,glm::normalize(glm::vec3(1.0f,1.0f,1.0f)));
+            mvp1 = proj * view * model1;
+            shader0.SetUniformMat4f("u_MVP", mvp1);
+            renderer.Draw(rData1);
             
-            renderer.Draw(va, ib, shader);
+            shader0.SetUniform4f("u_Color", 1.0f, 0.0f, 0.0f, 1.0f);
+            shader0.SetUniformMat4f("u_MVP", mvp2);
+            renderer.Draw(rData2);
             
             // Swap buffers
             glfwSwapBuffers(window);
             glfwPollEvents();
-            
-            // increment red
-            if (red < 0.0f || red > 1.0f)
-                step *= -1.0;
-            red += step;
         }
     }
     
     // Terminate GLFW
     glfwTerminate(); return 0;
 }
+
 

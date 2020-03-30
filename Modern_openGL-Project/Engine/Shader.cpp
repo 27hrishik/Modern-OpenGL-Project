@@ -14,13 +14,13 @@
 #include <fstream>
 #include <sstream>
 
-Shader::Shader(const std::string& filepath)
-: m_FilePath(filepath), m_RendererID(0)
+Shader::Shader(const std::string& vertPath,const std::string& fragPath)
+: m_VertPath(vertPath),m_FragPath(fragPath), m_RendererID(0)
 {
-    ShaderProgramSource source = ParseShader(filepath);
+    ShaderProgramSource source = ParseShader(vertPath,fragPath);
     
-    std::cout << "VERTEX" << std::endl << source.VertexSource << std::endl;
-    std::cout << "FRAGMENT" << std::endl << source.FragmentSource << std::endl;
+    //std::cout << "VERTEX" << std::endl << source.VertexSource << std::endl;
+    //std::cout << "FRAGMENT" << std::endl << source.FragmentSource << std::endl;
     
     m_RendererID = CreateShader(source.VertexSource, source.FragmentSource);
     
@@ -81,31 +81,38 @@ enum ShaderType
     NONE = -1, VERTEX = 0, FRAGMENT = 1
 };
 
-struct ShaderProgramSource Shader::ParseShader(const std::string& filepath)
+struct ShaderProgramSource Shader::ParseShader(const std::string& vertPath,const std::string& fragPath)
 {
     
-    std::ifstream stream(filepath);
-    std::string line;
-    std::stringstream ss[2];
-    ShaderType type = NONE;
-    
-    while (getline(stream, line))
-    {
-        if (line.find("#shader") != std::string::npos)
-        {
-            if (line.find("vertex") != std::string::npos)
-                type = VERTEX;
-            else if (line.find("fragment") != std::string::npos)
-                type = FRAGMENT;
-        }
-        else
-        {
-            ss[(int)type] << line << '\n';
-        }
+    // Read the Vertex Shader code from the file
+    std::string VertexShaderCode;
+    std::ifstream VertexShaderStream(vertPath, std::ios::in);
+    if(VertexShaderStream.is_open()){
+        std::stringstream sstr;
+        sstr << VertexShaderStream.rdbuf();
+        VertexShaderCode = sstr.str();
+        VertexShaderStream.close();
+    }else{
+        printf("Impossible to open %s. Are you in the right directory ? Don't forget to read the FAQ !\n", vertPath.c_str());
+        getchar();
+        return {"",""};
     }
     
-    struct ShaderProgramSource sps = { ss[0].str(), ss[1].str() };
-    return sps;
+    // Read the Fragment Shader code from the file
+    std::string FragmentShaderCode;
+    std::ifstream FragmentShaderStream(fragPath, std::ios::in);
+    if(FragmentShaderStream.is_open()){
+        std::stringstream sstr;
+        sstr << FragmentShaderStream.rdbuf();
+        FragmentShaderCode = sstr.str();
+        FragmentShaderStream.close();
+    }else{
+        printf("Impossible to open %s. Are you in the right directory ? Don't forget to read the FAQ !\n", fragPath.c_str());
+        getchar();
+        return {"",""};
+    }
+    return {VertexShaderCode,FragmentShaderCode};
+    
 }
 
 unsigned int Shader::CompileShader(unsigned int type, const std::string& source)

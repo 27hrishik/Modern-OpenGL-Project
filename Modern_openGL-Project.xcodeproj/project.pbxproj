@@ -15,6 +15,7 @@
 		C3A3A5FA2426A911002FA86C /* libGLEW.2.1.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C3A3A5F92426A911002FA86C /* libGLEW.2.1.0.dylib */; };
 		C3A3A5FC2426A941002FA86C /* libglfw.3.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C3A3A5FB2426A941002FA86C /* libglfw.3.3.dylib */; };
 		C3A3A5FE2426A9A5002FA86C /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C3A3A5FD2426A9A5002FA86C /* main.cpp */; };
+		C3B694832432298300149057 /* Primitives.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C3B694812432298300149057 /* Primitives.cpp */; };
 		C3FD9FAC242B7A3C00073762 /* Shader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C3FD9FA9242B77AA00073762 /* Shader.cpp */; };
 /* End PBXBuildFile section */
 
@@ -31,6 +32,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		C36790AB242F3CA7002995EF /* Unlit.vert */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = Unlit.vert; sourceTree = "<group>"; };
+		C36790AC242F3CD6002995EF /* Unlit.frag */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = Unlit.frag; sourceTree = "<group>"; };
 		C38C208B242CB59500053F80 /* Debugger.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Debugger.cpp; sourceTree = "<group>"; };
 		C38C208C242CB59500053F80 /* Debugger.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Debugger.hpp; sourceTree = "<group>"; };
 		C38C208E242CB6BE00053F80 /* Buffers.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Buffers.cpp; sourceTree = "<group>"; };
@@ -428,7 +431,10 @@
 		C3A3A5F72426A856002FA86C /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
 		C3A3A5F92426A911002FA86C /* libGLEW.2.1.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libGLEW.2.1.0.dylib; path = ../../../../usr/local/lib/libGLEW.2.1.0.dylib; sourceTree = "<group>"; };
 		C3A3A5FB2426A941002FA86C /* libglfw.3.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libglfw.3.3.dylib; path = ../../../../usr/local/lib/libglfw.3.3.dylib; sourceTree = "<group>"; };
-		C3A3A5FD2426A9A5002FA86C /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		C3A3A5FD2426A9A5002FA86C /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; wrapsLines = 0; };
+		C3B694812432298300149057 /* Primitives.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Primitives.cpp; sourceTree = "<group>"; };
+		C3B694822432298300149057 /* Primitives.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Primitives.hpp; sourceTree = "<group>"; };
+		C3D51F98242E128500CFE01D /* Basic.frag */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = Basic.frag; sourceTree = "<group>"; };
 		C3FD9FA9242B77AA00073762 /* Shader.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Shader.cpp; sourceTree = "<group>"; };
 		C3FD9FAA242B77AA00073762 /* Shader.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Shader.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -460,6 +466,8 @@
 				C38C2092242CBA6F00053F80 /* Renderer.hpp */,
 				C38C209B242D0AE200053F80 /* Textures.cpp */,
 				C38C209C242D0AE200053F80 /* Textures.hpp */,
+				C3B694812432298300149057 /* Primitives.cpp */,
+				C3B694822432298300149057 /* Primitives.hpp */,
 			);
 			path = Engine;
 			sourceTree = "<group>";
@@ -962,6 +970,9 @@
 			isa = PBXGroup;
 			children = (
 				C38C209F242D0FDE00053F80 /* Basic.vert */,
+				C3D51F98242E128500CFE01D /* Basic.frag */,
+				C36790AB242F3CA7002995EF /* Unlit.vert */,
+				C36790AC242F3CD6002995EF /* Unlit.frag */,
 			);
 			path = Shaders;
 			sourceTree = "<group>";
@@ -1027,6 +1038,7 @@
 				C38C209D242D0AE200053F80 /* Textures.cpp in Sources */,
 				C38C2093242CBA6F00053F80 /* Renderer.cpp in Sources */,
 				C38C2090242CB6BE00053F80 /* Buffers.cpp in Sources */,
+				C3B694832432298300149057 /* Primitives.cpp in Sources */,
 				C3FD9FAC242B7A3C00073762 /* Shader.cpp in Sources */,
 				C3A3A5FE2426A9A5002FA86C /* main.cpp in Sources */,
 			);
