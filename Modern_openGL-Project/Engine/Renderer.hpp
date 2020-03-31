@@ -14,20 +14,15 @@
 #include "Debugger.hpp"
 #include "Buffers.hpp"
 #include "Shader.hpp"
+#include "Mesh.hpp"
 
 struct RenderData
 {
-    VertexArray& vertexArray;
-    IndexBuffer& indexBuffer;
-    Shader& shader;
-    GLenum mode;
-    bool primitiveRestart;
+    Mesh& mesh;
+    Material& material;
     
-    RenderData(VertexArray& va,IndexBuffer& ib,Shader& shader,GLenum mode = GL_TRIANGLES,bool enablePrimitiveRestart = false)
-    :vertexArray(va),indexBuffer(ib),shader(shader),mode(mode)
-    {
-        
-    }
+    RenderData(Mesh& mesh,Material& material)
+    :mesh(mesh),material(material){}
     
 };
 

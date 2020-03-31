@@ -7,16 +7,17 @@
 //  Copyright © 2020 app king. All rights reserved.
 //
 
-#include "Primitives.hpp"
+#include "Mesh.hpp"
 #include "../glm/glm.hpp"
 #include "../glm/gtc/matrix_transform.hpp"
 //#include "../glm/gtc/type_ptr.hpp"
 
 std::vector<float> getUnitCircleVertices(int=10,float=0.0f,float=1.0f);
 
-std::tuple<std::vector<GLfloat>,std::vector<GLuint>> Primitives::CreateSphere(float radius, int hDiv , int vDiv) {
+Mesh Primitives::CreateSphere(float radius, int hDiv , int vDiv) {
     std::vector<GLfloat> vertices;
     std::vector<GLuint> indices;
+    VertexBufferLayout layout;
     int indicator = 0;
     int lats = vDiv,longs = hDiv;
     for(int i = 0; i <= lats; i++) {
@@ -47,14 +48,16 @@ std::tuple<std::vector<GLfloat>,std::vector<GLuint>> Primitives::CreateSphere(fl
         }
         indices.push_back(GL_PRIMITIVE_RESTART_FIXED_INDEX);
     }
-    return {vertices,indices};
+    layout.AddFloat(3);
+    return {vertices,indices,layout,GL_TRIANGLE_STRIP};
 }
 
-std::tuple<std::vector<GLfloat>,std::vector<GLuint>> Primitives::CreateCylinder(float height,int sectorDivision,float baseRadius, float topRadius, bool bCap, bool tCap){
+Mesh Primitives::CreateCylinder(float height,int sectorDivision,float baseRadius, float topRadius, bool bCap, bool tCap){
     
     std::vector<GLfloat> vertices = getUnitCircleVertices(sectorDivision,-height/2,baseRadius);
     std::vector<GLuint> indices;
     std::vector<GLfloat> top = getUnitCircleVertices(sectorDivision,height/2,topRadius);
+    VertexBufferLayout layout;
     vertices.insert(vertices.end(), top.begin(), top.end());
     for(int i=0;i<sectorDivision;i++)
     {
@@ -85,7 +88,8 @@ std::tuple<std::vector<GLfloat>,std::vector<GLuint>> Primitives::CreateCylinder(
             indices.insert(indices.end(), {sectorDivision+a,sectorDivision+b,index});
         }
     }
-    return {vertices,indices};
+    layout.AddFloat(3);
+    return {vertices,indices,layout};
 }
 
 std::vector<float> getUnitCircleVertices(int sectorCount, float yVal, float radius)
@@ -105,15 +109,17 @@ std::vector<float> getUnitCircleVertices(int sectorCount, float yVal, float radi
     return unitCircleVertices;
 }
 
-std::tuple<std::vector<GLfloat>,std::vector<GLuint>> Primitives::CreateQuad(float height,float width)
+Mesh Primitives::CreateQuad(float height,float width)
 {
     std::vector<GLfloat> vertices;
     std::vector<GLuint> indices;
+    VertexBufferLayout layout;
     vertices.insert(vertices.end(), {-width/2,-height/2,0.0f});
     vertices.insert(vertices.end(), {width/2,-height/2,0.0f});
     vertices.insert(vertices.end(), {width/2,height/2,0.0f});
     vertices.insert(vertices.end(), {-width/2,height/2,0.0f});
     indices.insert(indices.end(), {0,1,2});
     indices.insert(indices.end(), {0,2,3});
-    return {vertices,indices};
+    layout.AddFloat(3);
+    return {vertices,indices,layout};
 }

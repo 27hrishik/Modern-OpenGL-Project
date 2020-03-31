@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "C3A3A5EB2426A675002FA86C"
-               BuildableName = "Modern_openGL-Project"
-               BlueprintName = "Modern_openGL-Project"
-               ReferencedContainer = "container:Modern_openGL-Project.xcodeproj">
+               BuildableName = "Modern-OpenGL-Project"
+               BlueprintName = "Modern-OpenGL-Project"
+               ReferencedContainer = "container:Modern-OpenGL-Project.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "C3A3A5EB2426A675002FA86C"
-            BuildableName = "Modern_openGL-Project"
-            BlueprintName = "Modern_openGL-Project"
-            ReferencedContainer = "container:Modern_openGL-Project.xcodeproj">
+            BuildableName = "Modern-OpenGL-Project"
+            BlueprintName = "Modern-OpenGL-Project"
+            ReferencedContainer = "container:Modern-OpenGL-Project.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -57,9 +57,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "C3A3A5EB2426A675002FA86C"
-            BuildableName = "Modern_openGL-Project"
-            BlueprintName = "Modern_openGL-Project"
-            ReferencedContainer = "container:Modern_openGL-Project.xcodeproj">
+            BuildableName = "Modern-OpenGL-Project"
+            BlueprintName = "Modern-OpenGL-Project"
+            ReferencedContainer = "container:Modern-OpenGL-Project.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -76,9 +76,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "C3A3A5EB2426A675002FA86C"
-            BuildableName = "Modern_openGL-Project"
-            BlueprintName = "Modern_openGL-Project"
-            ReferencedContainer = "container:Modern_openGL-Project.xcodeproj">
+            BuildableName = "Modern-OpenGL-Project"
+            BlueprintName = "Modern-OpenGL-Project"
+            ReferencedContainer = "container:Modern-OpenGL-Project.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

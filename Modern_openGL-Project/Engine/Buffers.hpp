@@ -16,6 +16,7 @@
 class IndexBuffer
 {
 public:
+    IndexBuffer():m_RendererID(0),m_Count(0){};
     IndexBuffer(const unsigned int* indices, unsigned int count);
     ~IndexBuffer();
     
@@ -32,6 +33,7 @@ private:
 class VertexBuffer
 {
 public:
+    VertexBuffer():m_RendererID(0){};
     VertexBuffer(const void* data, unsigned int size);
     ~VertexBuffer();
     

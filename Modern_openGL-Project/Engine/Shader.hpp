@@ -33,19 +33,32 @@ public:
     
     void Bind() const;
     void Unbind() const;
-    
-    // Set uniforms
-    void SetUniform1i(const std::string& name, int value);
-    void SetUniform4f(const std::string& name, float f0, float f1, float f2, float f3);
-    void SetUniform1f(const std::string& name, float value);
-    void SetUniformMat4f(const std::string& name, const glm::mat4& matrix);
-    
-private:
     int GetUniformLocation(const std::string& name);
+private:
     struct ShaderProgramSource ParseShader(const std::string& vertPath,const std::string& fragPath);
     unsigned int CompileShader(unsigned int type, const std::string& source);
     unsigned int CreateShader(const std::string& vertexShader, const std::string& fragmentShader);
     
+};
+
+class Material{
+    Shader shader;
+public:
+    Material(const std::string& vertPath,const std::string& fragPath):shader(vertPath,fragPath){}
+    Material(Shader shader):shader(shader){};
+    void SetUniform(const std::string& name, int value);
+    void SetUniform(const std::string& name, float f0, float f1, float f2, float f3);
+    void SetUniform(const std::string& name, float value);
+    void SetUniform(const std::string& name, const glm::mat4& matrix);
+    void Bind()
+    {
+        shader.Bind();
+    }
+    void Unbind()
+    {
+        shader.Unbind();
+    }
+
 };
 
 #endif /* loadShader_hpp */

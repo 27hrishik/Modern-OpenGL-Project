@@ -26,10 +26,11 @@ void Renderer::Draw(const VertexArray& va, const IndexBuffer& ib, const Shader& 
 
 void Renderer::Draw(const RenderData &renderData)
 {
-    renderData.shader.Bind();
-    renderData.vertexArray.Bind();
-    renderData.indexBuffer.Bind();
-    if(renderData.primitiveRestart)
+    renderData.material.Bind();
+    //
+    renderData.mesh.v_Array.Bind();
+    renderData.mesh.i_Buffer.Bind();
+    if(renderData.mesh.restart)
     {
         GLCall( glEnable(GL_PRIMITIVE_RESTART));
         GLCall( glPrimitiveRestartIndex(GL_PRIMITIVE_RESTART_FIXED_INDEX));
@@ -37,6 +38,6 @@ void Renderer::Draw(const RenderData &renderData)
     {
         GLCall( glDisable(GL_PRIMITIVE_RESTART));
     }
-    GLCall( glDrawElements(renderData.mode, renderData.indexBuffer.GetCount(), GL_UNSIGNED_INT, nullptr) );
+    GLCall( glDrawElements(renderData.mesh.mode, renderData.mesh.i_Buffer.GetCount(), GL_UNSIGNED_INT, nullptr) );
 }
 
